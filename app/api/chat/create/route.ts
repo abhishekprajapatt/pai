@@ -1,0 +1,51 @@
+import Chat from '@/models/Chat';
+import connectDB from '@/database/db';
+import { getUserIdFromRequest } from '@/server/auth';
+import { NextRequest, NextResponse } from 'next/server';
+
+interface ApiResponse {
+  success: boolean;
+  message?: string;
+  error?: string;
+  data?: { _id: string };
+}
+
+export async function POST(
+  req: NextRequest,
+): Promise<NextResponse<ApiResponse>> {
+  try {
+    const userId = await getUserIdFromRequest(req);
+    if (!userId) {
+      return NextResponse.json({
+        success: false,
+        message: 'User not authenticated',
+      });
+    }
+
+    const db = await connectDB();
+    if (!db) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: 'Database unavailable; authenticated chat was not created',
+        },
+        { status: 503 },
+      );
+    }
+
+    const chatData = {
+      userId,
+      messages: [],
+      name: 'New Chat',
+    };
+
+    const newChat = await Chat.create(chatData);
+    return NextResponse.json({
+      success: true,
+      message: 'Chat created',
+      data: { _id: newChat._id.toString() },
+    });
+  } catch (error: any) {
+    return NextResponse.json({ success: false, error: error.message });
+  }
+}

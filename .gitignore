@@ -1,0 +1,49 @@
+# Dependencies
+node_modules/
+
+# Next.js build output
+.next/
+.open-next/
+.out/
+out/
+build/
+dist/
+.vercel/
+.wrangler/
+.turbo/
+
+# Environment files
+.env
+.env.*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.cloudflare
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Security / certificates
+*.pem
+*.key
+*.crt
+
+# TypeScript
+*.tsbuildinfo
+
+# Misc
+coverage/
+.cache/
