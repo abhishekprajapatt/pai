@@ -28,6 +28,7 @@ interface SettingsModalProps {
 export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
   const [activeTab, setActiveTab] = useState<SettingsTab>('general');
   const [search, setSearch] = useState('');
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -101,8 +102,10 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
           onChange={setActiveTab}
           search={search}
           onSearchChange={setSearch}
+          collapsed={sidebarCollapsed}
+          onToggle={() => setSidebarCollapsed((value) => !value)}
         />
-        <main className="min-w-0 flex-1 overflow-y-auto p-6 md:p-8">
+        <main className="min-w-0 flex-1 overflow-y-auto p-6 md:p-8 max-md:pl-16">
           <div className="mb-6 flex justify-end">
             <button
               type="button"

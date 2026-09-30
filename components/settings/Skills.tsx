@@ -246,7 +246,7 @@ export default function SkillsPanel() {
         Promise.all(
           (['skills', 'connectors', 'plugins'] as DirectoryKind[]).map(
             async (kind) => {
-              const response = await fetch(`/api/${kind}`, {
+              const response = await fetch(`/api/customize/${kind}`, {
                 headers: { Authorization: `Bearer ${token}` },
               });
               if (!response.ok) throw new Error(`Unable to load ${kind}`);
@@ -291,7 +291,7 @@ export default function SkillsPanel() {
     setCatalogLoading(true);
     setCatalogCursor(null);
     fetch(
-      `/api/${endpoint}?catalog=live&search=${encodeURIComponent(directoryQuery)}`,
+      `/api/customize/${endpoint}?catalog=live&search=${encodeURIComponent(directoryQuery)}`,
       {
         signal: controller.signal,
       },
@@ -322,7 +322,7 @@ export default function SkillsPanel() {
     setCatalogLoading(true);
     try {
       const response = await fetch(
-        `/api/${endpoint}?catalog=live&search=${encodeURIComponent(directoryQuery)}&cursor=${encodeURIComponent(catalogCursor)}`,
+        `/api/customize/${endpoint}?catalog=live&search=${encodeURIComponent(directoryQuery)}&cursor=${encodeURIComponent(catalogCursor)}`,
       );
       if (!response.ok) throw new Error('Directory catalog unavailable');
       const page = (await response.json()) as {
@@ -347,7 +347,7 @@ export default function SkillsPanel() {
   ) => {
     const token = await getIdToken();
     const endpoint = item.kind;
-    const response = await fetch(`/api/${endpoint}`, {
+    const response = await fetch(`/api/customize/${endpoint}`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,

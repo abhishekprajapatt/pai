@@ -51,8 +51,8 @@ export function SkillsProvider({ children }: { children: ReactNode }) {
     setError(null);
 
     try {
-      const response = await fetch('/api/skills', {
-        cache: 'force-cache',
+      const response = await fetch('/api/customize/skills', {
+        cache: 'no-store',
       });
       if (!response.ok) {
         throw new Error('Unable to load skills');
@@ -79,7 +79,7 @@ export function SkillsProvider({ children }: { children: ReactNode }) {
       author: input.author ?? 'Prajapatt AI',
     };
 
-    const response = await fetch('/api/skills', {
+    const response = await fetch('/api/customize/skills', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
@@ -98,7 +98,7 @@ export function SkillsProvider({ children }: { children: ReactNode }) {
 
   const updateSkill = useCallback(
     async (id: string, input: Partial<SkillRecord>) => {
-      const response = await fetch(`/api/skills/${id}`, {
+      const response = await fetch(`/api/customize/skills/${id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(input),
@@ -122,7 +122,9 @@ export function SkillsProvider({ children }: { children: ReactNode }) {
   );
 
   const deleteSkill = useCallback(async (id: string) => {
-    const response = await fetch(`/api/skills/${id}`, { method: 'DELETE' });
+    const response = await fetch(`/api/customize/skills/${id}`, {
+      method: 'DELETE',
+    });
     if (!response.ok) {
       const message = await response.text();
       throw new Error(message || 'Unable to delete skill');

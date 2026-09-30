@@ -473,7 +473,7 @@ const Sidebar: React.FC<SidebarProps> = ({ expand, setExpand }) => {
                 onClick={() => setSearchOpen(true)}
                 className="relative group mt-4"
               >
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 text-white/80" />
+                <Search className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-6 text-white/80 hover:bg-white/10 px-2 py-1 transition rounded-full" />
               </button>
             )}
           </div>
@@ -504,14 +504,6 @@ const Sidebar: React.FC<SidebarProps> = ({ expand, setExpand }) => {
                     >
                       <Plus size={18} />
                     </button>
-                    {/* <button
-                      type="button"
-                      onClick={() => router.push('/projects')}
-                      aria-label="Open projects"
-                      className="rounded-md p-1 hover:bg-white/10 hover:text-white"
-                    >
-                      <SlidersHorizontal size={17} />
-                    </button> */}
                     <button
                       className="rounded-md p-1 hover:bg-white/10 hover:text-white"
                       onClick={() => setProjectsOpen((value) => !value)}
@@ -713,17 +705,19 @@ const Sidebar: React.FC<SidebarProps> = ({ expand, setExpand }) => {
             </div>
 
             <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={(event) => {
-                  event.stopPropagation();
-                  setSearchOpen(true);
-                }}
-                className="flex h-8 w-8 items-center justify-center rounded-md text-white/70 transition hover:bg-white/10 hover:text-white"
-                aria-label="Open search"
-              >
-                <Search size={16} />
-              </button>
+              {expand && (
+                <button
+                  type="button"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    setSearchOpen(true);
+                  }}
+                  className="flex h-8 w-8 items-center justify-center rounded-md text-white/70 transition hover:bg-white/10 hover:text-white"
+                  aria-label="Open search"
+                >
+                  <Search size={16} />
+                </button>
+              )}
 
               {expand && (
                 <Image

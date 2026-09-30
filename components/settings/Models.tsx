@@ -1,7 +1,7 @@
 'use client';
 
 import { Plus, Trash2 } from 'lucide-react';
-import { FormEvent, useState } from 'react';
+import { useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useAppContext } from '@/context/AppContext';
 import { useFirebaseAuth } from '@/context/AuthContext';
@@ -32,6 +32,16 @@ export default function ModelsPanel() {
   const [models, setModels] = useState<string[]>([]);
   const [selectedModel, setSelectedModel] = useState('');
   const [loading, setLoading] = useState(false);
+  const formInitialValues = useMemo(
+    () => ({
+      provider,
+      name: providers[provider].name,
+      baseUrl: providers[provider].baseUrl,
+      model: selectedModel || 'gpt-4o-mini',
+      apiKey,
+    }),
+    [apiKey, provider, selectedModel],
+  );
   const discover = async () => {
     if (!apiKey.trim()) return toast.error('Enter the provider API key first');
     setLoading(true);
@@ -146,14 +156,9 @@ export default function ModelsPanel() {
         </div>
 
         <AIModelForm
-          initialValues={{
-            provider,
-            name: providers[provider].name,
-            baseUrl: providers[provider].baseUrl,
-            model: selectedModel || 'gpt-4o-mini',
-            apiKey: apiKey,
-          }}
-          submitLabel="Add model"
+          initialValues={formInitialValues}
+          submitLabel="Save model"
+          showAdvancedFields={false}
           onSubmit={add}
         />
       </div>

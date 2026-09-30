@@ -51,6 +51,7 @@ interface AppContextType {
 const ChatPage: React.FC = () => {
   const [expand, setExpand] = useState<boolean>(false);
   const [greeting, setGreeting] = useState<string>('');
+  const [chatMenuOpen, setChatMenuOpen] = useState(false);
   const params = useParams();
   const router = useRouter();
   const chatId = params.id as string;
@@ -218,17 +219,39 @@ const ChatPage: React.FC = () => {
               <div className="relative flex min-h-0 flex-1 flex-col items-center justify-start w-full max-h-screen overflow-y-auto pt-16">
                 {isAuthenticated && (
                   <div
-                    className={`fixed top-4 flex gap-2 ${
+                    className={`fixed top-4 ${
                       expand ? 'hidden md:left-72' : 'left-20'
-                    } border border-transparent hover:border-gray-500/50 py-1 px-2 rounded-lg font-semibold mb-6 text-sm z-10 hover:bg-[#292a2d] bg-opacity-90`}
+                    } z-20`}
                   >
-                    {selectedChat.name}{' '}
-                    <ChevronDown
-                      size={16}
-                      className={`transition-transform cursor-pointer ${
-                        expand ? 'rotate-180' : ''
-                      }`}
-                    />
+                    <button
+                      type="button"
+                      onClick={() => setChatMenuOpen((value) => !value)}
+                      className="flex items-center gap-2 rounded-lg border border-transparent px-2 py-1 text-sm font-semibold hover:border-gray-500/50 hover:bg-[#292a2d]"
+                    >
+                      {selectedChat.name}
+                      <ChevronDown
+                        size={16}
+                        className={chatMenuOpen ? 'rotate-180' : ''}
+                      />
+                    </button>
+                    {chatMenuOpen && (
+                      <div className="mt-2 max-h-80 w-64 overflow-y-auto rounded-xl border border-white/10 bg-[#151515] p-1 shadow-2xl">
+                        {chats.map((chat) => (
+                          <button
+                            key={chat._id}
+                            type="button"
+                            onClick={() => {
+                              setSelectedChat(chat);
+                              setChatMenuOpen(false);
+                              router.push(`/chat/${chat._id}`);
+                            }}
+                            className={`block w-full truncate rounded-lg px-3 py-2 text-left text-sm hover:bg-white/10 ${chat._id === chatId ? 'bg-white/10 text-white' : 'text-white/70'}`}
+                          >
+                            {chat.name}
+                          </button>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 )}
                 {selectedChat.messages.map((message, index) => (
