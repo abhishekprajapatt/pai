@@ -25,7 +25,7 @@ import ChatLabel from '@/components/chats/ChatLabel';
 import SearchOverlay from '@/components/shared/SearchOverlay';
 import ProjectLabel from '@/components/projects/ProjectLabel';
 import { getTranslation } from '@/lib/translations';
-import { FaReddit, FaDiscord } from 'react-icons/fa';
+import { FaReddit, FaDiscord, FaTwitter } from 'react-icons/fa';
 import { useAppContext } from '@/context/AppContext';
 import { useProjectsContext } from '@/context/ProjectsContext';
 import SettingsModal from '@/components/settings/Settings';
@@ -745,7 +745,7 @@ const Sidebar: React.FC<SidebarProps> = ({ expand, setExpand }) => {
             >
               <button
                 onClick={() =>
-                  window.open('https://omg-ai.vercel.app', '_blank')
+                  window.open('https://ai.prajapatt.tech', '_blank')
                 }
                 className="w-full flex items-center gap-3 font-head text-white/80 text-sm p-3 rounded-lg hover:bg-gray-500/20 transition cursor-pointer group relative"
               >
@@ -779,7 +779,7 @@ const Sidebar: React.FC<SidebarProps> = ({ expand, setExpand }) => {
               <button
                 onClick={() =>
                   window.open(
-                    'https://instagram.com/abhishekprajapatt',
+                    'https://instagram.com/prajapatt.ai',
                     '_blank',
                   )
                 }
@@ -792,7 +792,7 @@ const Sidebar: React.FC<SidebarProps> = ({ expand, setExpand }) => {
               <button
                 onClick={() =>
                   window.open(
-                    'https://linkedin.com/in/abhishekprajapatt',
+                    'https://in.linkedin.com/company/prajapatt',
                     '_blank',
                   )
                 }
@@ -804,15 +804,15 @@ const Sidebar: React.FC<SidebarProps> = ({ expand, setExpand }) => {
 
               <button
                 onClick={() =>
-                  window.open('https://discord.gg/abhishekprajapatt', '_blank')
+                  window.open('https://x.com/prajapatthq', '_blank')
                 }
                 className="w-full flex items-center gap-3 font-head text-white/80 text-sm p-3 rounded-lg hover:bg-gray-500/20 transition cursor-pointer"
               >
-                <FaDiscord size={16} />
-                <span>Discord</span>
+                <FaTwitter size={16} />
+                <span>X (formlly Twitter)</span>
               </button>
 
-              <button
+              {/* <button
                 onClick={() =>
                   window.open(
                     'https://reddit.com/u/abhishekprajapatt',
@@ -823,7 +823,7 @@ const Sidebar: React.FC<SidebarProps> = ({ expand, setExpand }) => {
               >
                 <FaReddit size={16} />
                 <span>Reddit</span>
-              </button>
+              </button> */}
 
               <button
                 onClick={() => setShowSettings(true)}
