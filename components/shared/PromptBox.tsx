@@ -312,7 +312,7 @@ const PromptBox: React.FC<PromptBoxProps> = ({ initialPrompt = '' }) => {
                   ? 'w-32 rounded-full border border-gray-300/40 bg-[#09090b] p-1 cursor-pointer hover:bg-gray-500/20 transition'
                   : 'w-auto rounded-md border border-transparent px-1 py-0.5'
               }`}
-              title={showModelSelector ? 'Select AI Model' : 'Prajapatt AI'}
+              title={showModelSelector ? 'Select AI Model' : 'Prajapatt 1'}
             >
               <div className="flex items-center gap-2">
                 <Image
@@ -323,7 +323,7 @@ const PromptBox: React.FC<PromptBoxProps> = ({ initialPrompt = '' }) => {
                   className="w-5 h-5 rounded-full"
                 />
                 <span className="truncate">
-                  {selectedModelDetails?.name || 'Prajapatt AI'}
+                  {selectedModelDetails?.name || 'Prajapatt 1'}
                 </span>
               </div>
               {showModelSelector && (

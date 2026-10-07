@@ -109,7 +109,7 @@ export default function ModelsPanel() {
     <section>
       <h2 className="text-lg font-semibold">AI Models</h2>
       <p className="mt-2 text-sm text-white/50">
-        Prajapatt AI is the default. Add another provider using its API key.
+        Prajapatt 1 is the default. Add another provider using its API key.
       </p>
       <div className="mt-6 space-y-4 rounded-xl border border-white/10 p-4">
         <div className="space-y-3">

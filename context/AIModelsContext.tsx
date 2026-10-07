@@ -142,7 +142,7 @@ export function AIModelsProvider({ children }: { children: ReactNode }) {
     () => [
       {
         id: 'prajapatt',
-        name: 'Prajapatt AI',
+        name: 'Prajapatt 1',
         image: assets.pai_logo,
       },
       ...customModels.map((model) => ({

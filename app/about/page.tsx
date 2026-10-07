@@ -165,6 +165,37 @@ export default function AboutPage() {
           </div>
         </section>
 
+        <section className="mt-16">
+          <div className="mb-8">
+            <p className="text-sm uppercase tracking-[0.2em] text-white/45">
+              Prajapatt AI models
+            </p>
+            <h2 className="mt-2 text-2xl font-medium sm:text-3xl">
+              Meet Prajapatt 1
+            </h2>
+            <p className="mt-3 max-w-2xl text-sm leading-7 text-white/65">
+              One model family, with names that make it easy to find the right
+              fit for the way you work.
+            </p>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              'Prajapatt 1',
+              'Prajapatt 1 Pro',
+              'Prajapatt 1 Reasoning',
+              'Prajapatt 1 Mini',
+            ].map((model) => (
+              <div
+                key={model}
+                className="rounded-[1.5rem] border border-white/10 bg-white/5 p-6"
+              >
+                <p className="text-lg font-medium text-white">{model}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         <section className="mt-16 rounded-[2rem] border border-white/10 bg-[#0d1117] p-6 sm:p-8">
           <div className="mb-8 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
             <div>
@@ -338,5 +369,3 @@ export default function AboutPage() {
     </main>
   );
 }
-
-

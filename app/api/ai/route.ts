@@ -12,7 +12,8 @@ const PRAJAPATT_AI_CONFIG = {
   apiKey: process.env.PRAJAPATT_AI_API_KEY || '',
 };
 
-const DEFAULT_PRAJAPATT_MODEL = 'deepseek/deepseek-chat';
+const DEFAULT_PRAJAPATT_MODEL =
+  process.env.PRAJAPATT_AI_MODEL || 'prajapatt-1';
 
 const MODEL_PROVIDERS = {
   anthropic: {
@@ -96,6 +97,7 @@ async function* generateAIResponse(
   model: string,
   contentMessage: any,
   customModel?: CustomProviderConfig,
+  userId?: string | null,
 ): AsyncGenerator<string, void, unknown> {
   const provider = customModel?.apiKey
     ? {
@@ -107,7 +109,7 @@ async function* generateAIResponse(
     : {
         ...PRAJAPATT_AI_CONFIG,
         model: DEFAULT_PRAJAPATT_MODEL,
-        provider: 'deepseek',
+        provider: 'prajapatt',
       };
 
   if (
@@ -140,6 +142,7 @@ async function* generateAIResponse(
     client,
     [{ role: 'user', content: contentMessage }],
     provider.model,
+    userId,
   );
 }
 
@@ -147,11 +150,13 @@ async function* streamOpenAIResponse(
   openai: OpenAI,
   messages: any,
   model: string,
+  userId?: string | null,
 ) {
   const stream = await openai.chat.completions.create({
     messages,
     model,
     stream: true,
+    ...(userId ? { user: userId } : {}),
   });
 
   for await (const chunk of stream) {
@@ -342,7 +347,12 @@ export async function POST(req: NextRequest): Promise<Response> {
     }
 
     let fullResponse = '';
-    const generator = generateAIResponse(model, contentMessage, customModel);
+    const generator = generateAIResponse(
+      model,
+      contentMessage,
+      customModel,
+      userId,
+    );
 
     const customStream = new ReadableStream({
       async start(controller) {
